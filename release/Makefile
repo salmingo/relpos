@@ -13,7 +13,7 @@
 # PARTICULAR PURPOSE.
 
 
-
+VPATH = ..
 am__is_gnu_make = { \
   if test -z '$(MAKELEVEL)'; then \
     false; \
@@ -85,9 +85,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin16.7.0
-host_triplet = x86_64-apple-darwin16.7.0
-target_triplet = x86_64-apple-darwin16.7.0
+build_triplet = x86_64-apple-darwin17.2.0
+host_triplet = x86_64-apple-darwin17.2.0
+target_triplet = x86_64-apple-darwin17.2.0
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -235,7 +235,7 @@ LIBOBJS =
 LIBS = 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /Users/lxm/Workspace/relpos/missing makeinfo
-MKDIR_P = ./install-sh -c -d
+MKDIR_P = ../install-sh -c -d
 OBJEXT = o
 PACKAGE = relpos
 PACKAGE_BUGREPORT = 
@@ -249,10 +249,10 @@ SET_MAKE =
 SHELL = /bin/sh
 STRIP = 
 VERSION = 1.0
-abs_builddir = /Users/lxm/Workspace/relpos
-abs_srcdir = /Users/lxm/Workspace/relpos
-abs_top_builddir = /Users/lxm/Workspace/relpos
-abs_top_srcdir = /Users/lxm/Workspace/relpos
+abs_builddir = /Users/lxm/Workspace/relpos/release
+abs_srcdir = /Users/lxm/Workspace/relpos/release/..
+abs_top_builddir = /Users/lxm/Workspace/relpos/release
+abs_top_srcdir = /Users/lxm/Workspace/relpos/release/..
 ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
@@ -261,10 +261,10 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin16.7.0
+build = x86_64-apple-darwin17.2.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin16.7.0
+build_os = darwin17.2.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -272,10 +272,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin16.7.0
+host = x86_64-apple-darwin17.2.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin16.7.0
+host_os = darwin17.2.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -294,16 +294,16 @@ program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
-srcdir = .
+srcdir = ..
 sysconfdir = ${prefix}/etc
-target = x86_64-apple-darwin16.7.0
+target = x86_64-apple-darwin17.2.0
 target_alias = 
 target_cpu = x86_64
-target_os = darwin16.7.0
+target_os = darwin17.2.0
 target_vendor = apple
 top_build_prefix = 
 top_builddir = .
-top_srcdir = .
+top_srcdir = ..
 SUBDIRS = src
 all: all-recursive
 

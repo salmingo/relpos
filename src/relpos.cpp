@@ -188,11 +188,12 @@ void ResolveLine(const char* line, double& ra, double& dc, string& fname) {
  */
 void ResolveFilename(const char* fname, string& cid, int& ymd, int& hms) {
 	char* token;
-	char seps[] = "G_T.fit";
+	char seps[] = "G_T";
 	int pos(0);
 	int n = strlen(fname);
-	char* buff = new char[n + 1];
-	strcpy(buff, fname);
+	char* buff = new char[n - 3];
+	strncpy(buff, fname, n - 4);
+	buff[n - 4] = 0;
 
 	token = strtok(buff, seps);
 	while(token) {
@@ -201,7 +202,7 @@ void ResolveFilename(const char* fname, string& cid, int& ymd, int& hms) {
 			cid = token;
 			break;
 		case 2: // obstyp or imgtyp
-			if (strcasecmp(token, "mon")) ++pos;
+			if (strcasecmp(token, "mon") && strcasecmp(token, "toa")) ++pos;
 			break;
 		case 3: // imgtyp
 			break;
@@ -342,7 +343,7 @@ int FindMatchedData(double secs, int from, int n) {
 
 	for (i = from + 1; i < n; ++i) {
 		dt1 = fabs(secs - pt_ffov.pts[i].secs);
-		if (dt1 > dt0) break;
+		if (dt1 > dt0) continue;
 		dt0 = dt1;
 		from = i;
 	}
@@ -364,11 +365,11 @@ void ScanData() {
 	for (i = 0; i < n1; ++i) {
 		pt = &pt_jfov.pts[i];
 		if ((k = FindMatchedData(pt->secs, j, n2)) >= 0) {
-			j = k;
+//			j = k;
 
 			PointCross ptc;
 			ptc.SetPoint(*pt);
-			ptc.SetPointRef(pt_ffov.pts[j]);
+			ptc.SetPointRef(pt_ffov.pts[k]);
 			pt_cross.push_back(ptc);
 		}
 	}
@@ -434,12 +435,12 @@ void OutputResult(FILE* fp) {
 		tmean = tsum / n;
 		rrms = sqrt((rsq - rsum * rmean) / n);
 		trms = sqrt((tsq - tsum * tmean) / n);
-		printf("****************************** Statistical results ******************************\n");
-		printf("Rotation Minimum = %6.1f \t Rotation Maximum = %6.1f\n", reduce(rmin, 360.0), reduce(rmax, 360.0));
-		printf("Rotation Mean    = %6.2f \t Rotation Stdev   = %6.2f\n", reduce(rmean, 360.0), rrms);
-		printf("Tilt Minimum     = %6.1f \t Tilt Maximum     = %6.1f\n", tmin, tmax);
-		printf("Tilt Mean        = %6.2f \t Tilt Stdev       = %6.2f\n", tmean, trms);
-		printf("****************************** Statistical results ******************************\n");
+		fprintf(fp, "****************************** Statistical results ******************************\n");
+		fprintf(fp, "Rotation Minimum = %6.1f \t Rotation Maximum = %6.1f\n", reduce(rmin, 360.0), reduce(rmax, 360.0));
+		fprintf(fp, "Rotation Mean    = %6.2f \t Rotation Stdev   = %6.2f\n", reduce(rmean, 360.0), rrms);
+		fprintf(fp, "Tilt Minimum     = %6.1f \t Tilt Maximum     = %6.1f\n", tmin, tmax);
+		fprintf(fp, "Tilt Mean        = %6.2f \t Tilt Stdev       = %6.2f\n", tmean, trms);
+		fprintf(fp, "****************************** Statistical results ******************************\n");
 	}
 }
 //////////////////////////////////////////////////////////////////////////////
